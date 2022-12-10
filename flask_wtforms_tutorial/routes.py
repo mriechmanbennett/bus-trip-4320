@@ -10,17 +10,15 @@ def SeatingChart():
     chartFile = open('reservations.txt','r')
     resLines = chartFile.readlines()
     seatDict = {}
-    emptyRowList = ['O', 'O', 'O', 'O']
     # Create a seat dictionary that is empty
     for x in range(12):
-        seatDict[x] = emptyRowList
+        seatDict[x] = ['O', 'O', 'O', 'O']
     # Update filled seats
     for line in resLines:
         items = line.split(', ')
         print(items[1])
         print(items[2])
-        #seatDict[items[1]][items[2]] = 'X'
-    print(seatDict)
+        seatDict[int(items[1])][int(items[2])] = 'X'
     return seatDict
 
 # Returns true if the credentials are valid, false if not
