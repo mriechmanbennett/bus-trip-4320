@@ -27,7 +27,7 @@ class UserOptionForm(FlaskForm):
 class ReservationForm(FlaskForm):
     """Reservation Form"""
     
-    #THIS IS WHERE YOU WILL IMPLEMENT CODE TO POPULATE THE SYMBOL FIELD WITH STOCK OPTIONS
+    main = SubmitField("Main Menu", render_kw={'style': 'width: 125px; height: 40px; position: absolute; right: 250px; top: 125px;'})
     first_name = StringField('First Name', [DataRequired()])
     last_name = StringField('Last Name', [DataRequired()])
     row = SelectField("Choose Row", [DataRequired()],
