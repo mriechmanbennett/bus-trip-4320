@@ -5,7 +5,14 @@ from .forms import *
 
 # Returns true if the credentials are valid, false if not
 def SecretCheck(userName, password):
-    return True
+    secretFile = open('passcodes.txt','r')
+    credsList = secretFile.readlines()
+    validCred = False
+    for line in credsList:
+        creds = line.split(', ')
+        if (userName == creds[0]) and (password == creds[1]):
+            True
+    return validCred
 
 
 @app.route("/", methods=['GET', 'POST'])
