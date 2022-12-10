@@ -12,6 +12,8 @@
             <h3>Error: Row: {{ row + 1}} Seat: {{ seat + 1 }} is already assigned. Choose again.</h3>
         {% endif %}
         {% if seatAvailability == True %}
+            <p>Congratulations {{ firstName }}! Row: {{ row + 1}} Seat: {{ seat + 1 }} is now reserved for you! Enjoy the trip!</p>
+            <p>Your e-ticket number is: {{ resNumber }}</p>
         {% endif %}
   {% endif %}
     <h3>Seating Chart</h3>
