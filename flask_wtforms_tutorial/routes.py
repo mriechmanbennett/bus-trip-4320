@@ -3,6 +3,22 @@ from flask import redirect, render_template, url_for, request, flash
 
 from .forms import *
 
+
+def get_cost_matrix():
+    cost_matrix = [[100, 75, 50, 100] for row in range(12)]
+    return cost_matrix
+
+# Returns integer value for total sales
+def TotalSales():
+    total = 0
+    seatDict = SeatingChart()
+    costMatrix = get_cost_matrix()
+    for x in range(12):
+        for y in range(4):
+            if seatDict[x][y] == 'X':
+                total += costMatrix[x][y]
+    return total
+
 # Check availability of seat
 
 # Return seating chart as a dictionary of lists, one list per row
@@ -54,18 +70,20 @@ def admin():
     form = AdminLoginForm()
     chartArray = False
     auth = False
+    sales = 0
     errorList = []
     if request.method == 'POST':
         userName = request.form['username']
         password = request.form['password']
         if SecretCheck(userName, password):
             chartArray = SeatingChart()
+            sales = TotalSales()
             auth = True
         else:
             errorList.append('Bad username or password')
             #return render_template("admin-error.html", form=form, errors=errorList, template="form-template")
 
-    return render_template("admin.html", form=form, errorList=errorList, auth=auth, template="form-template", seatingChart=chartArray)
+    return render_template("admin.html", form=form, sales=sales, errorList=errorList, auth=auth, template="form-template", seatingChart=chartArray)
 
 @app.route("/reservations", methods=['GET', 'POST'])
 def reservations():

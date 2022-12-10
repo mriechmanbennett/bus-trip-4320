@@ -12,6 +12,7 @@
     {% for row in range(12) %}
         <p class="seatingChart">{{ seatingChart[row] }}</p>
     {% endfor %}
+    <p class="sales">Total Sales: {{ sales }}</p>
   {% endif %}
   {% if errorList %}
       {% for error in errorList %}
