@@ -9,6 +9,9 @@
   <h2 class="title">Administrator Login</h2>
   {% if auth %}
     <h3>Authorized</h3>
+    {% for row in range(12) %}
+        <p class="seatingChart">{{ seatingChart[row] }}</p>
+    {% endfor %}
   {% endif %}
   {% if errorList %}
       {% for error in errorList %}
