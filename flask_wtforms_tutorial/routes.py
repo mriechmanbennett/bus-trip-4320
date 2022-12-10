@@ -10,8 +10,9 @@ def SecretCheck(userName, password):
     validCred = False
     for line in credsList:
         creds = line.split(', ')
-        if (userName == creds[0]) and (password == creds[1]):
-            True
+        if (userName == creds[0]) and (password == creds[1].strip()):
+            validCred = True
+
     return validCred
 
 
@@ -38,7 +39,8 @@ def admin():
         password = request.form['password']
         if SecretCheck(userName, password):
             return render_template("admin-reservations.html", form=form, template="form-template")
-
+        else:
+            return render_template("admin-error.html", form=form, template="form-template")
 
     return render_template("admin.html", form=form, template="form-template")
 

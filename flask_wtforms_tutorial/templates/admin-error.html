@@ -7,8 +7,7 @@
 {% block content %}
 <div class="formwrapper">
   <h2 class="title">Administrator Login</h2>
-
-  <h3 class="errors">{{ error }}</h3>
+  <p class="title">Bad username or password, please try again</p>
   <form method="POST" action="/admin">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.username.label }} {{ form.username }}
