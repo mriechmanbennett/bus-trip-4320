@@ -19,7 +19,13 @@ def TotalSales():
                 total += costMatrix[x][y]
     return total
 
-# Check availability of seat
+# Check availability of specific seat
+def CheckSeatAvailability(x, y):
+    seatDict = SeatingChart()
+    if seatDict[x][y] == 'X':
+        return True
+    else:
+        return False
 
 # Return seating chart as a dictionary of lists, one list per row
 def SeatingChart():
@@ -89,6 +95,7 @@ def admin():
 def reservations():
 
     form = ReservationForm()
+    chartArray = SeatingChart()
 
-    return render_template("reservations.html", form=form, template="form-template")
+    return render_template("reservations.html", form=form, seatingChart=chartArray, template="form-template")
 
