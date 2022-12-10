@@ -142,3 +142,20 @@ i {
 .g-recaptcha div {
   margin: auto;
 }
+
+
+.navbar{
+  float: right;
+  border-right: 1px solid #000 !important;
+  text-align: right; 
+  /* margin-right: 0;
+  margin-left: auto; */
+}
+
+/* .navbar :last-child{
+  border-right: none !important;
+}
+
+.navbar span{
+  padding-right: 10px;
+} */
