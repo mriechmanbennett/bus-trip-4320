@@ -19,13 +19,17 @@ def TotalSales():
                 total += costMatrix[x][y]
     return total
 
+def CreateReservation(firstName, lastName, row, seat):
+    
+    return resNumber
+
 # Check availability of specific seat
 def CheckSeatAvailability(x, y):
     seatDict = SeatingChart()
-    if seatDict[x][y] == 'X':
-        return True
-    else:
+    if seatDict[int(x)][int(y)] == 'X':
         return False
+    else:
+        return True
 
 # Return seating chart as a dictionary of lists, one list per row
 def SeatingChart():
@@ -78,7 +82,7 @@ def admin():
     auth = False
     sales = 0
     errorList = []
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate_on_submit():
         userName = request.form['username']
         password = request.form['password']
         if SecretCheck(userName, password):
@@ -87,7 +91,6 @@ def admin():
             auth = True
         else:
             errorList.append('Bad username or password')
-            #return render_template("admin-error.html", form=form, errors=errorList, template="form-template")
 
     return render_template("admin.html", form=form, sales=sales, errorList=errorList, auth=auth, template="form-template", seatingChart=chartArray)
 
@@ -96,6 +99,22 @@ def reservations():
 
     form = ReservationForm()
     chartArray = SeatingChart()
+    row = 99
+    seat = 99
+    seatAvailability = False
+    submitted = False
+    firstName = ''
+    lastName = ''
+    if request.method == 'POST' and form.validate_on_submit():
+        submitted = True
+        firstName = request.form['first_name']
+        lastName = request.form['last_name']
+        row = int(request.form['row']) - 1
+        seat = int(request.form['seat']) - 1
+        seatAvailability = CheckSeatAvailability(row, seat)
+        if seatAvailability:
+            resNumber = CreateReservation(firstName, lastName, row, seat)
 
-    return render_template("reservations.html", form=form, seatingChart=chartArray, template="form-template")
+
+    return render_template("reservations.html", row=row, seat=seat, firstName=firstName, lastName=lastName, seatAvailability=seatAvailability, form=form, submitted=submitted, seatingChart=chartArray, template="form-template")
 

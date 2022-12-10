@@ -7,12 +7,19 @@
 {% block content %}
 <div class="formwrapper">
   <h2 class="title">Reserve Your Seat</h2>
-  <h3>Seating Chart</h3>
+  {% if submitted == True %}
+        {% if seatAvailability == False %}
+            <h3>Error: Row: {{ row + 1}} Seat: {{ seat + 1 }} is already assigned. Choose again.</h3>
+        {% endif %}
+        {% if seatAvailability == True %}
+        {% endif %}
+  {% endif %}
+    <h3>Seating Chart</h3>
     <p>X = Reserved seat : O = Available Seat</p>
     {% for row in range(12) %}
         <p class="seatingChart">{{ seatingChart[row] }}</p>
     {% endfor %}
-  <form method="POST" action="/admin">
+  <form method="POST" action="/reservations">
       {{ form.csrf_token }}
       <div class="form-field">{{ form.first_name.label }} {{ form.first_name }}
         {% if form.first_name.errors %}
