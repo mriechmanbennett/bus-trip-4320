@@ -7,7 +7,14 @@
 {% block content %}
 <div class="formwrapper">
   <h2 class="title">Administrator Login</h2>
-
+  {% if auth %}
+    <h3>Authorized</h3>
+  {% endif %}
+  {% if errorList %}
+      {% for error in errorList %}
+        <p class="error">{{ error }}</p>
+      {% endfor %}
+  {% endif %}
   <h3 class="errors">{{ error }}</h3>
   <form method="POST" action="/admin">
       {{ form.csrf_token }}
